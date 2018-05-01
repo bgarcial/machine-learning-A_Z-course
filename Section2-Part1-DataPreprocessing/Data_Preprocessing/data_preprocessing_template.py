@@ -334,6 +334,40 @@ de mi modelo con un conjunto separado de datos de pruebas
 # MIraremos como son transformadas las variables cómo van desde
 # valores grandes y muy diferentes a valores pequeños e iguales.
 
+"""
+Primero esto
+https://docs.google.com/document/d/1dCiLKG65mJTXyNzcBTdPzcpS9NyaL3p6nQ-snEWAY-M/edit#bookmark=id.32u67sg0ky9r
+Existen dos preguntas que podemos resolver nosotros mismos
+
+La primera es realmente importante y podemos encontrarla mucho en 
+Google. 
+¿Necesitamos ajustar y transformar las variables ficticias?
+
+Como podemos ver las variables ficticias nos permiten cambiar su formato 
+y estan con valores entre 0 y 1
+
+En Google algunos dicen que no es necesario escalar estas variables ficticias 
+Otros dicen que si es necesario porque queremos precisi[on en las predicciones
+En la opinion del teacher, dice que depende del contexto
+
+Depende de que tanto deseo mantener interpretaci[on en mis modelos
+Porque si escalamos esto será bueno porque todo estará en la misma 
+escala, seremos felices con eso y será bueno para nuestras 
+predicciones, pero quién perderá la interpretación de saber 
+qué observaciones pertenecen a qué país, etc.
+
+Así que, como quiera, no romperá su modelo si no escala las 
+variables ficticias porque de hecho habrá en la misma escala 
+que las escalas futuras.
+
+Aquí las variables que tomamos van entre - 1 y 1 creo que veremos
+Las variables aquí que tomamos van entre menos 1 y 1 creo que veremos, 
+pero dado que este es nuestro último tutorial y no tendremos ninguna 
+interpretación para hacer, escalaremos esas demasiadas variables
+
+"""
+
+
 from sklearn.preprocessing import StandardScaler
 
 # Creamos un nuevo objeto de la clase StandardScaler()
@@ -343,7 +377,7 @@ sc_X = StandardScaler()
 
 # Y ahora, de manera muy simple, ajustaremos y transformaremos
 # directamente nuestro conjunto de entrenamiento y R en un conjunto
-# Vamos a transformar X_train, así que recalcularemos el extremo porque
+# Vamos a transformar X_train, así que recalcularemos X_train porque
 # queremos que sea de escala, y para hacerlo tomaremos nuestro objeto
 # sc_X y luego llamaremos al método de fit_transform
 
@@ -363,34 +397,53 @@ X_train = sc_X.fit_transform(X_train)
 # con fit_transform porque ya esta ajustado al conjunto de entrenamiento
 X_test = sc_X.transform(X_test)
 
-"""
-https://docs.google.com/document/d/1dCiLKG65mJTXyNzcBTdPzcpS9NyaL3p6nQ-snEWAY-M/edit#bookmark=id.32u67sg0ky9r
-Existen dos preguntas que podemos resolver nosotros mismos
+""" 
+sigue aqui https://docs.google.com/document/d/1dCiLKG65mJTXyNzcBTdPzcpS9NyaL3p6nQ-snEWAY-M/edit#bookmark=id.uv4pocjl240d
+Ahora vemos que en X_train, todas las variables pertenecen 
+al mismo rango, estan en la misma escala, se puede detallar
+que todas las variables estan entre -1 y 1 
 
-La primera es realmente importante y podemos encontrarla mucho en 
-Google. 
-¿Necesitamos ajustar y transformar las variables ficticias?
+ESto es perfecto, pues mejorara mucho nuestros modelos de ML
 
-Como podemos ver las variables ficticias nos permiten cambiar su formato 
-y estan co valores entre 0 y 1
+Incluso, si algunas veces los modelos de ML no son basados en 
+distancias Euclidianas aún asi es muy necesario hacer
+Feature scaling porque el algoritmo convergera mucho 
+mas rapido- Este sera el caso para los arboles de decision, 
+los cuales no son basados en Distancias Euclidianas pero
+pero veremos que tendremos que hacer escalas de características porque 
+si no lo hacemos se ejecutarán durante un tiempo muy largo
 
-En Google algunos dicen que no es necesario escalar estas variables ficticias 
-Otros dicen que si es necesario porque queremos precisi[on en las predicciones
-En la opinion del teacher, dice que depende del contexto
+MIramos x_test 
+sigue aqui 
+https://docs.google.com/document/d/1dCiLKG65mJTXyNzcBTdPzcpS9NyaL3p6nQ-snEWAY-M/edit#bookmark=id.5ifa56o283s5
 
-Depende de que tanto deseo mantener interpretaci[on en mis modelos
-Porque si escalamos esto será bueno porque todo estará en la misma 
-escala, seremos felices con eso y será bueno para nuestras 
-predicciones, pero quién perderá la interpretación de saber 
-qué observaciones pertenecen a qué país, etc.
 
-Así que, como quiera, no romperá su modelo si no escala las 
-variables ficticias porque de hecho habrá en la misma escala 
-que las escalas futuras.
+La segunda pregunta tiene que vewr con 
+¿NEcesirtamos aplicar escalamiento de caracteristicas al vector de la variable
+dependiente y? En este caso a y_train y a y_test?
 
-"""
+Asi es como vemos y_train
+y_train
+Out[2]: array([1, 1, 1, 0, 1, 0, 0, 1])
+sigue aqui https://docs.google.com/document/d/1dCiLKG65mJTXyNzcBTdPzcpS9NyaL3p6nQ-snEWAY-M/edit#bookmark=id.9fajkrondguw
 """
 # Creamos un nuevo objeto de la clase StandardScaler()
 # para escalar la variable vector dependiente y
-sc_y = StandardScaler()
-y_train = sc_y.fit_transform(y_train)"""
+"""
+¿NEcesirtamos aplicar escalamiento de caracteristicas al vector de la variable
+dependiente y? En este caso a y_train y a y_test
+Es una variable categorica porque toma solo dos valors 
+Y ahora la pregunta es ¿necesitamos aplicar funciones de escala en este?
+Y la respuesta es No esta vez
+No necesitamos hacerlo porque este es un problema de clasificación con una categoria llamada variable dependiente
+
+PARA LA REGRESIÓN CUANDO la variable dependiente tomará un gran rango de valores, necesitaremos aplicar la escala de características a la variable dependiente y también
+"""
+# sc_y = StandardScaler()
+# y_train = sc_y.fit_transform(y_train)"""
+
+"""
+Hemos hecho todos los pasos requeridos para el preprocesamiento de datos
+los que hay que hacer para preparar cualquier dataset con el cual 
+deseemos construir modelos de ML
+"""
