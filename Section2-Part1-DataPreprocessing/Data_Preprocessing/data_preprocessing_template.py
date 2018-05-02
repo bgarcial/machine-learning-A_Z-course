@@ -191,7 +191,7 @@ y el dataset original
 
 # Encoding the Dependent Variable
 """
-Y ahora alégrese de que no tendremos que usar el codificador 100, 
+Y ahora alégrese de que no tendremos que usar el codificador para purchased, 
 solo necesitaremos utilizar el codificador de etiquetas, ya que como 
 la variable dependiente, el modelo de aprendizaje automático sabrá que 
 es una categoría y que no hay un orden entre los dos.
